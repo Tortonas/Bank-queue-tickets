@@ -30,7 +30,7 @@ nav .wrapper form {
 nav .wrapper form button {
     float: right;
     margin: 20px 10px;
-    background-color: #4CAF50; /* Green */
+    background-color: #0EA9E4;
     border: none;
     color: white;
     padding: 10px 25px;
@@ -39,6 +39,12 @@ nav .wrapper form button {
     font-size: 16px;
     font-family: "LemonMilk";
     border-radius: 8%;
+    border-style: solid;
+    border-width: 1px;
+}
+
+nav .wrapper form button:hover{
+    background-color: rgb(42, 157, 202);
 }
 
 main {
@@ -50,13 +56,13 @@ main {
     width: 100%;
 }
 
-.waiting-box h1{
+.waiting-box h1 {
     clear: both;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.waiting-box h3{
+.waiting-box h3 {
     margin: 5px;
     clear: both;
     text-align: center;
@@ -66,4 +72,9 @@ footer {
     width: 100%;
     height: 80px;
     background-color: #B9BEB3;
+}
+
+.icon {
+    margin-top: 10px;
+    width: 30px;
 }
