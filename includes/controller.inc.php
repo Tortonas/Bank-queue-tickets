@@ -8,6 +8,10 @@
 
 		public function register($username, $name, $lastname, $password, $password_repeat)
 		{
+			//TODO: Set default session values
+
+
+			if(strlen($password) == 0 || strlen($username) == 0 || strlen($name) == 0 || strlen($lastname) == 0 || strlen($password_repeat) == 0)
 				return false;
 			if($password != $password_repeat)
 				return false;
@@ -26,12 +30,13 @@
 
 		public function login($username, $password)
 		{
-
+			// TODO: Complete login
+			$_SESSION['loginStatus'] = "client";
 		}
 
 		public function logout()
 		{
-
+			// TODO: Complete logout, remove session value.
 		}
 	}
 
