@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    foreach (glob("includes/*.php") as $filename)
+    {
+        include $filename;
+    }
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,10 +22,10 @@
         <nav>
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
-                <form action="client-login.html">
+                <form action="client-login.php">
                     <button>Prisijungti kaip klientui</button>
                 </form>
-                <form action="specialist-login.html">
+                <form action="specialist-login.php">
                     <button>Prisijungti kaip specialistui</button>
                 </form>
                 <form action="/">
@@ -28,10 +35,13 @@
         </nav>
         <main>
             <div class="wrapper">
-                <div class="waiting-box">
-                    <h1>Laukiančiųjų eilė ir apytikslis laukimo laikas</h1>
-                    <h3>124 - Antanas M. (3min)</h3>
-                    <h3>125 - Jonas C. (6min)</h3>
+                <div class="login-screen">
+                    <h1>Specialisto prisijungimo langas</h1>
+                    <form method="POST">
+                        <input name="username" type="text" placeholder="Vartotojo vardas"></input><br> 
+                        <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
+                        <button name="loginButton">Prisijungti</button><br>
+                    </form>
                 </div>
             </div>
         </main>

@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    foreach (glob("includes/*.php") as $filename)
+    {
+        include $filename;
+    }
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,10 +22,10 @@
         <nav>
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
-                <form action="client-login.html">
+                <form action="client-login.php">
                     <button>Prisijungti kaip klientui</button>
                 </form>
-                <form action="specialist-login.html">
+                <form action="specialist-login.php">
                     <button>Prisijungti kaip specialistui</button>
                 </form>
                 <form action="/">
@@ -38,6 +45,22 @@
                         <input name="password-repeat" type="password" placeholder="Pakartokite slaptažodį"></input><br> 
                         <button name="loginButton">Registruotis</button><br>
                     </form>
+                    <?php
+                        if(isset($_POST['loginButton']))
+                        {
+                            $userHandler = new UserHandler(); 
+                            $loginReturnValue = $userHandler->register($_POST['username'], $_POST['name'], $_POST['lastName'], $_POST['password'], $_POST['password-repeat']);
+                            if($loginReturnValue)
+                            {
+                                echo "Registracija sėkminga!";
+                            }
+                            else
+                            {
+                                echo "Registracija nesėkminga";
+                            }
+                        }
+
+                    ?>
                 </div>
             </div>
         </main>
