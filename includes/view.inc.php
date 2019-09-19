@@ -45,6 +45,38 @@
                                 <button>Kliento zona</button>
                               </form>';
         }
+
+        public function printSpecialistZoneButton()
+        {
+            echo '<form action="/main-specialist.php">
+                                <button>Admin zona</button>
+                              </form>';
+        }
+
+        public function printYouCannotAccess()
+        {
+            echo "Jūs negalite matyti šio puslapio!";
+        }
+
+        public function saluteMember()
+        {
+            echo "Sveiki prisijungę, ".$_SESSION['clientName'];
+        }
+
+        public function printFailedLogin()
+        {
+            echo "Prisijungimas nesėkmingas!";
+        }
+
+        public function printRandomError()
+        {
+            echo "Nutiko klaida!";
+        }
+
+        public function printSuccessfulRegister()
+        {
+            echo "Jūsų laikas sėkmingai užregistruotas!";
+        }
 	}
 
 ?>

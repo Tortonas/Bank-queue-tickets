@@ -29,7 +29,10 @@
                     else
                     {
                        $viewHandler->printLogOutButton();
-                       $viewHandler->printClientZoneButton();
+                       if($_SESSION['loginStatus'] == "client")
+                            $viewHandler->printClientZoneButton();
+                       else
+                           $viewHandler->printSpecialistZoneButton();
                         if(isset($_GET['logout']))
                         {
                             $userHandler->logout();

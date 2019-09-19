@@ -22,25 +22,56 @@
         <nav>
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
-                <form action="client-login.php">
-                    <button>Prisijungti kaip klientui</button>
-                </form>
-                <form action="specialist-login.php">
-                    <button>Prisijungti kaip specialistui</button>
-                </form>
-                <form action="/">
-                    <button>Pagrindinis</button>
-                </form>
+                <?php
+                $userHandler = new UserHandler();
+                $viewHandler = new ViewHandler();
+                if($_SESSION['loginStatus'] == "0")
+                {
+                    $viewHandler->printClientLoginButton();
+                    $viewHandler->printSpecialistLoginButton();
+                }
+                else
+                {
+                    $viewHandler->printLogOutButton();
+                    if($_SESSION['loginStatus'] == "client")
+                        $viewHandler->printClientZoneButton();
+                    else
+                        $viewHandler->printSpecialistZoneButton();
+                    if(isset($_GET['logout']))
+                    {
+                        $userHandler->logout();
+                        $viewHandler->redirect_to_another_page("index.php", 0);
+                    }
+                }
+                $viewHandler->printMainMenuButton();
+                ?>
             </div>
         </nav>
         <main>
             <div class="wrapper">
                 <div class="client-main">
                     <h1>Talonėlio išdavimo punktas</h1>
-                    <form action="GET">
-                        <span> Kiek laiko planuojate užtrukt? </span><input type="text" placeholder="Laikas"></input><br>
+                    <form method="GET">
+                        <span> Kiek laiko planuojate užtrukt? </span><input name="estimatedTime" type="text" placeholder="Laikas"></input><br>
                         <button name="registerReceipt" type="submit">Registruotis</button>
                     </form>
+                    <?php
+                        if(isset($_GET['registerReceipt']))
+                        {
+                            // TODO: Ar reikia neleisti klientui regintis kiek nori kartu?
+                            $returnValueBool = $userHandler->checkIfPositiveNumber($_GET['estimatedTime']);
+                            if($returnValueBool)
+                            {
+                                $dbModel = new DB_Model();
+                                $dbModel->registerTicket($_GET['estimatedTime']);
+                                $viewHandler->printSuccessfulRegister();
+                            }
+                            else
+                            {
+                                $viewHandler->printRandomError();
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </main>

@@ -22,15 +22,33 @@
         <nav>
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
-                <form action="client-login.php">
-                    <button>Prisijungti kaip klientui</button>
-                </form>
-                <form action="specialist-login.php">
-                    <button>Prisijungti kaip specialistui</button>
-                </form>
-                <form action="/">
-                    <button>Pagrindinis</button>
-                </form>
+                <?php
+                $userHandler = new UserHandler();
+                $viewHandler = new ViewHandler();
+                if($_SESSION['loginStatus'] == "0")
+                {
+                    $viewHandler->printClientLoginButton();
+                    $viewHandler->printSpecialistLoginButton();
+                }
+                else
+                {
+                    $viewHandler->printLogOutButton();
+                    $viewHandler->printSpecialistZoneButton();
+                    if(isset($_GET['logout']))
+                    {
+                        $userHandler->logout();
+                        $viewHandler->redirect_to_another_page("index.php", 0);
+                    }
+                }
+                $viewHandler->printMainMenuButton();
+
+                if($_SESSION['loginStatus'] != "specialist")
+                {
+                    $viewHandler->printYouCannotAccess();
+                    $viewHandler->redirect_to_another_page("index.php", 0);
+                    die();
+                }
+                ?>
             </div>
         </nav>
         <main>

@@ -22,15 +22,29 @@
         <nav>
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
-                <form action="client-login.php">
-                    <button>Prisijungti kaip klientui</button>
-                </form>
-                <form action="specialist-login.php">
-                    <button>Prisijungti kaip specialistui</button>
-                </form>
-                <form action="/">
-                    <button>Pagrindinis</button>
-                </form>
+                <?php
+                $userHandler = new UserHandler();
+                $viewHandler = new ViewHandler();
+                if($_SESSION['loginStatus'] == "0")
+                {
+                    $viewHandler->printClientLoginButton();
+                    $viewHandler->printSpecialistLoginButton();
+                }
+                else
+                {
+                    $viewHandler->printLogOutButton();
+                    if($_SESSION['loginStatus'] == "client")
+                        $viewHandler->printClientZoneButton();
+                    else
+                        $viewHandler->printSpecialistZoneButton();
+                    if(isset($_GET['logout']))
+                    {
+                        $userHandler->logout();
+                        $viewHandler->redirect_to_another_page("index.php", 0);
+                    }
+                }
+                $viewHandler->printMainMenuButton();
+                ?>
             </div>
         </nav>
         <main>
@@ -51,7 +65,7 @@
                             $loginReturnValue = $userHandler->loginAsClient($_POST['username'], $_POST['password']);
                             if($loginReturnValue)
                             {
-                                echo "Sveiki prisijungę, ".$_SESSION['clientName'];
+                                $viewHandler->saluteMember();
                                 $viewHandler->redirect_to_another_page("index.php",1);
                             }
                             else

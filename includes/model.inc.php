@@ -45,7 +45,21 @@
 
 		public function checkIfYouCanLogin($username, $password)
         {
-            $sql = "SELECT * FROM `klientai` WHERE username='$username' AND password='$password'";
+            $sql = "SELECT * FROM `clients` WHERE username='$username' AND password='$password'";
+            $sqlAnswer = mysqli_query($this->conn, $sql);
+            if(mysqli_num_rows($sqlAnswer)>=1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public function checkIfYouCanLoginSpecialist($username, $password)
+        {
+            $sql = "SELECT * FROM `specialists` WHERE username='$username' AND password='$password'";
             $sqlAnswer = mysqli_query($this->conn, $sql);
             if(mysqli_num_rows($sqlAnswer)>=1)
             {
@@ -61,7 +75,7 @@
         {
             $clientName = null;
 
-            $sql = "SELECT * FROM klientai WHERE username='$username'";
+            $sql = "SELECT * FROM clients WHERE username='$username'";
             $sqlResult = mysqli_query($this->conn, $sql);
 
             if ($sqlResult->num_rows > 0)
@@ -79,6 +93,70 @@
             }
 
             return $clientName;
+        }
+
+        public function getClientIdByUsername($username)
+        {
+            $clientId = null;
+
+            $sql = "SELECT * FROM clients WHERE username='$username'";
+            $sqlResult = mysqli_query($this->conn, $sql);
+
+            if ($sqlResult->num_rows > 0)
+            {
+                while($row = $sqlResult->fetch_assoc())
+                {
+                    $clientId = $row['id'];
+                    break;
+                }
+            }
+
+            if($clientId == null)
+            {
+                echo "getClientIdByUsername() method in model.inc.php didn't find any username!";
+            }
+
+            return $clientId;
+        }
+
+        public function getClientNameByUsernameSpecialist($username)
+        {
+            $clientName = null;
+
+            $sql = "SELECT * FROM specialists WHERE username='$username'";
+            $sqlResult = mysqli_query($this->conn, $sql);
+
+            if ($sqlResult->num_rows > 0)
+            {
+                while($row = $sqlResult->fetch_assoc())
+                {
+                    $clientName = $row['name']." ".$row['lastname'];
+                    break;
+                }
+            }
+
+            if($clientName == null)
+            {
+                echo "getClientNameByUsernameSpecialist() method in model.inc.php didn't find any username!";
+            }
+
+            return $clientName;
+        }
+
+        public function registerTicket($time)
+        {
+            $time = $this->real_escape_string($time);
+            $clientId = $_SESSION['clientId'];
+            $sql = "INSERT INTO visits (estimatedTime, client_id) VALUES ('$time', '$clientId')";
+            if($this->conn->query($sql) === TRUE)
+            {
+                return true;
+            }
+            else
+            {
+                echo "Unexpected error from registerTicket() on model.inc.php";
+                return false;
+            }
         }
 	}
 
