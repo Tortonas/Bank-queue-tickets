@@ -16,10 +16,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main-client.php">
+        <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="60" column="90" selection-start-line="60" selection-start-column="90" selection-end-line="60" selection-end-column="90" />
+            <state relative-caret-position="229">
+              <caret line="36" column="25" lean-forward="true" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/model.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="150" column="49" selection-start-line="150" selection-start-column="48" selection-end-line="150" selection-end-column="49" />
+            <state relative-caret-position="229">
+              <caret line="163" column="129" lean-forward="true" selection-start-line="163" selection-start-column="129" selection-end-line="163" selection-end-column="129" />
             </state>
           </provider>
         </entry>
@@ -36,8 +36,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/view.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="841">
-              <caret line="75" column="47" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="47" />
+            <state relative-caret-position="365">
+              <caret line="78" column="9" lean-forward="true" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+              <folding>
+                <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -47,15 +51,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="688">
               <caret line="89" column="45" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" selection-start-line="20" selection-end-line="42" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -74,6 +69,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1207">
               <caret line="71" column="61" selection-start-line="71" selection-start-column="61" selection-end-line="71" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main-client.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="620">
+              <caret line="60" column="90" selection-start-line="60" selection-start-column="90" selection-end-line="60" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -102,20 +106,22 @@
     <findStrings>
       <find>klientai</find>
       <find>getclient</find>
+      <find>h3</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/main-specialist.php" />
         <option value="$PROJECT_DIR$/register.php" />
         <option value="$PROJECT_DIR$/client-login.php" />
         <option value="$PROJECT_DIR$/specialist-login.php" />
         <option value="$PROJECT_DIR$/includes/controller.inc.php" />
+        <option value="$PROJECT_DIR$/main-client.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/style/style.css" />
         <option value="$PROJECT_DIR$/includes/view.inc.php" />
         <option value="$PROJECT_DIR$/includes/model.inc.php" />
-        <option value="$PROJECT_DIR$/main-client.php" />
       </list>
     </option>
   </component>
@@ -132,7 +138,22 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="462c0819:PsiDirectoryNode" />
+              <item name="style" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -172,12 +193,12 @@
       <updated>1568909935094</updated>
       <workItem from="1568909936248" duration="8380000" />
       <workItem from="1568918514198" duration="86000" />
-      <workItem from="1568918614871" duration="171000" />
+      <workItem from="1568918614871" duration="3537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8637000" />
+    <option name="totallyTimeSpent" value="12003000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -228,25 +249,7 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/includes/model.inc.php</url>
-          <line>115</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="42" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/register.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -275,6 +278,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main-client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="60" column="90" selection-start-line="60" selection-start-column="90" selection-end-line="60" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/includes/controller.inc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="688">
@@ -282,24 +292,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/view.inc.php">
+    <entry file="file://$PROJECT_DIR$/style/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="841">
-          <caret line="75" column="47" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="47" />
+        <state relative-caret-position="470">
+          <caret line="73" column="23" lean-forward="true" selection-start-line="73" selection-start-column="23" selection-end-line="73" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/model.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="150" column="49" selection-start-line="150" selection-start-column="48" selection-end-line="150" selection-end-column="49" />
+        <state relative-caret-position="229">
+          <caret line="163" column="129" lean-forward="true" selection-start-line="163" selection-start-column="129" selection-end-line="163" selection-end-column="129" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main-client.php">
+    <entry file="file://$PROJECT_DIR$/includes/view.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="60" column="90" selection-start-line="60" selection-start-column="90" selection-end-line="60" selection-end-column="90" />
+        <state relative-caret-position="365">
+          <caret line="78" column="9" lean-forward="true" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="36" column="25" lean-forward="true" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
         </state>
       </provider>
     </entry>

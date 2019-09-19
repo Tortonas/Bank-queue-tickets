@@ -158,6 +158,48 @@
                 return false;
             }
         }
+
+        public function readAndPrintVisits()
+        {
+            $sql = "SELECT visits.id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id LIMIT 10";
+
+            $result = $this->conn->query($sql);
+
+            $viewHandler = new ViewHandler();
+            $viewHandler->printWaitingPeopleList($result);
+        }
+
+        public function calculateLeftTime()
+        {
+            // Check if I even need to calculate left time (if client has ticket)
+
+            $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id ORDER BY visit_id LIMIT 10";
+            $result = $this->conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                $estimatedTimeLeft = 0;
+                while($row = $result->fetch_assoc())
+                {
+                    if($_SESSION['clientId'] == $row['client_id'])
+                    {
+                        $viewHandler = new ViewHandler();
+                        if($estimatedTimeLeft == 0)
+                        {
+                            $viewHandler->informClientAboutHisQueueEnd();
+                        }
+                        else
+                        {
+                            $viewHandler->informAboutEstimatedLeftTime($estimatedTimeLeft);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        $estimatedTimeLeft = $estimatedTimeLeft + $row['estimatedTime'];
+                    }
+                }
+            }
+        }
 	}
 
 ?>

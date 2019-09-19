@@ -74,6 +74,13 @@ main {
     text-align: center;
 }
 
+.waiting-box h4 {
+    font-size: 30px;
+    margin-top: 40px;
+    clear: both;
+    text-align: center;
+}
+
 .login-screen {
     width: 100%;
 }

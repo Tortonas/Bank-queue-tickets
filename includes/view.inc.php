@@ -77,6 +77,32 @@
         {
             echo "Jūsų laikas sėkmingai užregistruotas!";
         }
+
+        public function printWaitingPeopleList($peopleList)
+        {
+            if ($peopleList->num_rows > 0)
+            {
+                while($row = $peopleList->fetch_assoc())
+                {
+                    $lastName = $row['lastname'];
+                    echo "<h3>".$row['id']." - ".$row['name']." ".$lastName[0].". (".$row['estimatedTime']."min)</h3>";
+                }
+            }
+            else
+            {
+                echo "<h3>Laukiančių žmonių eilėje nėra!</h3>";
+            }
+        }
+
+        public function informClientAboutHisQueueEnd()
+        {
+            echo "<h4 style='color:green'>Jūsų eilė atėjo! :)</h4>";
+        }
+
+        public function informAboutEstimatedLeftTime($time)
+        {
+            echo "<h4 style='color:#ff4643'>Likęs laikas: " .$time." minutės!</h4>";
+        }
 	}
 
 ?>

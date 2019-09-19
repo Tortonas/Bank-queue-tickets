@@ -47,8 +47,15 @@
             <div class="wrapper">
                 <div class="waiting-box">
                     <h1>Laukiančiųjų eilė ir apytikslis laukimo laikas</h1>
-                    <h3>124 - Antanas M. (3min)</h3>
-                    <h3>125 - Jonas C. (6min)</h3>
+                    <?php
+                        $dbModel = new DB_Model();
+                        $dbModel->readAndPrintVisits();
+
+                        if($_SESSION['loginStatus'] == "client")
+                        {
+                            $dbModel->calculateLeftTime();
+                        }
+                    ?>
                 </div>
             </div>
         </main>
