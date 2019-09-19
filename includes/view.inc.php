@@ -103,6 +103,20 @@
         {
             echo "<h4 style='color:#ff4643'>Likęs laikas: " .$time." minutės!</h4>";
         }
+
+        public function informAboutEmptyQueue()
+        {
+            echo "<h4>Laukiančių žmonių eilėje kolkas nebėra :)</h4>";
+        }
+
+        public function printNextClientForm($name, $lastname, $visit_id, $estimatedTime)
+        {
+            echo "<form method='POST'>";
+            echo "<h3>Sekantis klientas - <span style='color:#ff4251'>" .$name." ".$lastname."</span> su numeriu <span style='color:#ff4251'>".$visit_id
+                ."</span> Skirtas laikas - <span style='color:#ff4251'>".$estimatedTime."</span> minutės.</h3>";
+            echo "<button name='clientServiced'>Klientas aptarnautas</button>";
+            echo "</form>";
+        }
 	}
 
 ?>

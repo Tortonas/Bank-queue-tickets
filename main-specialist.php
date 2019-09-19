@@ -54,7 +54,10 @@
         <main>
             <div class="wrapper">
                 <div class="specialist-main">
-                    soon
+                    <?php
+                        $dbHandler = new DB_Model();
+                        $dbHandler->getNextWaitingClient();
+                    ?>
                 </div>
             </div>
         </main>

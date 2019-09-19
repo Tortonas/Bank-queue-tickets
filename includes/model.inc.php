@@ -161,7 +161,7 @@
 
         public function readAndPrintVisits()
         {
-            $sql = "SELECT visits.id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id LIMIT 10";
+            $sql = "SELECT visits.id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id ORDER BY visits.id LIMIT 10";
 
             $result = $this->conn->query($sql);
 
@@ -198,6 +198,34 @@
                         $estimatedTimeLeft = $estimatedTimeLeft + $row['estimatedTime'];
                     }
                 }
+            }
+        }
+
+        public function getNextWaitingClient()
+        {
+            $sql = "SELECT visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients on visits.client_id = clients.id ORDER BY visit_id";
+            $result = $this->conn->query($sql);
+
+            if ($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $viewHandler = new ViewHandler();
+                    $viewHandler->printNextClientForm($row['name'], $row['lastname'], $row['visit_id'], $row['estimatedTime']);
+                    if(isset($_POST['clientServiced']))
+                    {
+                        $visitId = $row['visit_id'];
+                        $sqlDelete = "DELETE FROM visits WHERE id='$visitId'";
+                        $this->sendQuery($sqlDelete);
+                        $viewHandler->redirect_to_another_page("/main-specialist.php", 0); // basically page reload
+                    }
+                    break;
+                }
+            }
+            else
+            {
+                $viewHandler = new ViewHandler();
+                $viewHandler->informAboutEmptyQueue();
             }
         }
 	}

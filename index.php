@@ -15,12 +15,16 @@
         <link rel="stylesheet" href="./style/style.css">
     </head>
     <body>
+    <?php
+        //Auto refresh 5sec cd
+        $viewHandler = new ViewHandler();
+        $viewHandler->redirect_to_another_page("/", 5);
+    ?>
         <nav>
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
                 <?php
                     $userHandler = new UserHandler();
-                    $viewHandler = new ViewHandler();
                     if($_SESSION['loginStatus'] == "0")
                     {
                         $viewHandler->printClientLoginButton();

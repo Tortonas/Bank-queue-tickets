@@ -66,7 +66,7 @@
                             if($loginReturnValue)
                             {
                                 $viewHandler->saluteMember();
-                                $viewHandler->redirect_to_another_page("index.php",1);
+                                $viewHandler->redirect_to_another_page("index.php",0);
                             }
                             else
                             {

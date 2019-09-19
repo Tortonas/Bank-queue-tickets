@@ -44,6 +44,13 @@
                     }
                 }
                 $viewHandler->printMainMenuButton();
+
+                if($_SESSION['loginStatus'] != "client")
+                {
+                    $viewHandler->printYouCannotAccess(); // TODO: This text is bugged at the top of navbar, fix using CSS.
+                    $viewHandler->redirect_to_another_page("index.php", 0);
+                    die();
+                }
                 ?>
             </div>
         </nav>
