@@ -52,14 +52,15 @@
                             $loginReturnValue = $userHandler->register($_POST['username'], $_POST['name'], $_POST['lastName'], $_POST['password'], $_POST['password-repeat']);
                             if($loginReturnValue)
                             {
+                                $viewHandler = new ViewHandler();
                                 echo "Registracija sėkminga!";
+                                $viewHandler->redirect_to_another_page("client-login.php", 2);
                             }
                             else
                             {
                                 echo "Registracija nesėkminga";
                             }
                         }
-
                     ?>
                 </div>
             </div>
@@ -67,7 +68,7 @@
         <footer>
             <div class="wrapper">
                 <a href="https://github.com/Tortonas/Bank-queue-tickets" target="_blank"><img class="icon" src="./img/github.png" alt="github logo"></a>
-                <h4>Project was done by Valentinas Kasteckis 2019</h2>
+                <h4>Project was done by Valentinas Kasteckis 2019</h4>
             </div>
         </footer>
     </body>

@@ -13,8 +13,8 @@
 		{
 			$this->server = "localhost";
 			$this->dbName = "u429721638_nfq";
-			$this->dbUser = "u429721638_nfq";
-			$this->dbPassword = "nfq321";
+			$this->dbUser = "root";
+			$this->dbPassword = "";
 
 			$this->conn = new mysqli($this->server, $this->dbUser, $this->dbPassword, $this->dbName);
 
@@ -42,6 +42,44 @@
 		{
 			return mysqli_real_escape_string($this->conn, $text);
 		}
+
+		public function checkIfYouCanLogin($username, $password)
+        {
+            $sql = "SELECT * FROM `klientai` WHERE username='$username' AND password='$password'";
+            $sqlAnswer = mysqli_query($this->conn, $sql);
+            if(mysqli_num_rows($sqlAnswer)>=1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public function getClientNameByUsername($username)
+        {
+            $clientName = null;
+
+            $sql = "SELECT * FROM klientai WHERE username='$username'";
+            $sqlResult = mysqli_query($this->conn, $sql);
+
+            if ($sqlResult->num_rows > 0)
+            {
+                while($row = $sqlResult->fetch_assoc())
+                {
+                    $clientName = $row['name']." ".$row['lastname'];
+                    break;
+                }
+            }
+
+            if($clientName == null)
+            {
+                echo "getClientNameByUsername() method in model.inc.php didn't find any username!";
+            }
+
+            return $clientName;
+        }
 	}
 
 ?>

@@ -43,13 +43,30 @@
                         <button name="loginButton">Prisijungti</button><br>
                         <a href="register.php">Neesate užisiregistravę? Užsiregistruokite!</a>
                      </form>
+                    <?php
+                        if(isset($_POST['loginButton']))
+                        {
+                            $userHandler = new UserHandler();
+                            $viewHandler = new ViewHandler();
+                            $loginReturnValue = $userHandler->loginAsClient($_POST['username'], $_POST['password']);
+                            if($loginReturnValue)
+                            {
+                                echo "Sveiki prisijungę, ".$_SESSION['clientName'];
+                                $viewHandler->redirect_to_another_page("index.php",1);
+                            }
+                            else
+                            {
+                                echo "Prisijungimas nesėkmingas!";
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </main>
         <footer>
             <div class="wrapper">
                 <a href="https://github.com/Tortonas/Bank-queue-tickets" target="_blank"><img class="icon" src="./img/github.png" alt="github logo"></a>
-                <h4>Project was done by Valentinas Kasteckis 2019</h2>
+                <h4>Project was done by Valentinas Kasteckis 2019</h4>
             </div>
         </footer>
     </body>
