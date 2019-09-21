@@ -57,7 +57,6 @@
         <main>
             <div class="wrapper">
                 <div class="client-main">
-
                     <?php
                         $dbModel = new DB_Model();
                         $viewHandler->printTicketReceptionForm();

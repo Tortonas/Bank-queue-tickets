@@ -213,6 +213,8 @@
                                 }*/
                                 $averageWaitingTime = $averageWaitingTime / $averageWaitingTimeCount;
 
+                                $averageWaitingTime = round($averageWaitingTime *  $howManyClientsInFront);
+
                                 $viewHandler->informAboutEstimatedLeftTime($estimatedTimeLeft, $averageWaitingTime);
                             }
                         }
@@ -333,13 +335,25 @@
             // Since this is re-used code from before and it searches estimated time left with client_id and I got visit_id I have to get that other variable.
             $sqlTransferClientIdToVisitId = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' AND visits.id='$id' ORDER BY visit_id";
             $result = $this->conn->query($sqlTransferClientIdToVisitId);
+
+            $didIFindVisitId = false;
+            $viewHandler = new ViewHandler();
+
             if ($result->num_rows > 0)
             {
                 while ($row = $result->fetch_assoc())
                 {
                     $id = $row['client_id'];
+                    $didIFindVisitId = true;
                 }
             }
+
+            if(!$didIFindVisitId)
+            {
+                $viewHandler->printTicketIdNotFound();
+                return;
+            }
+
 
             $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' ORDER BY visit_id";
             $result = $this->conn->query($sql);
@@ -352,7 +366,6 @@
                 {
                     if($id == $row['client_id'])
                     {
-                        $viewHandler = new ViewHandler();
                         if($estimatedTimeLeft == 0)
                         {
                             $viewHandler->informClientAboutHisQueueEnd();
@@ -375,6 +388,8 @@
                                     $averageWaitingTimeCount = 1;
                                 }*/
                                 $averageWaitingTime = $averageWaitingTime / $averageWaitingTimeCount;
+
+                                $averageWaitingTime = round($averageWaitingTime *  $howManyClientsInFront);
 
                                 $viewHandler->informAboutEstimatedLeftTime($estimatedTimeLeft, $averageWaitingTime);
                             }

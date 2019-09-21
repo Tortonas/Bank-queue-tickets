@@ -70,7 +70,7 @@
 
         public function printRandomError()
         {
-            echo "Nutiko klaida!";
+            echo "<span style='color:red'>Nutiko klaida!</span>";
         }
 
         public function printSuccessfulRegister()
@@ -135,7 +135,7 @@
             echo '<h1>Talonėlio išdavimo punktas</h1>
                     <form method="GET">
                         <span> Kiek laiko planuojate užtrukt? </span><input name="estimatedTime" type="text" placeholder="Laikas"></input><br>
-                        <button name="registerReceipt" type="submit">Registruotis</button>
+                        <button name="registerReceipt" type="submit" class="main-button">Registruotis</button>
                     </form>';
         }
 
@@ -144,8 +144,13 @@
             echo "<h1>Pasitikrinkite apytiksli laukimo laiką</h1>";
             echo "<form method='GET'>";
             echo "Suveskite talonėlio NR <input name='ticketId' placeholder='Talonėlio numeris'><br>";
-            echo "<button name='submitTicket'>Patikrinti</button>";
+            echo "<button name='submitTicket' class='main-button'>Patikrinti</button>";
             echo "</form>";
+        }
+
+        public function printTicketIdNotFound()
+        {
+            echo "<span style='color:red'>Vizito numeris nerastas!</span>";
         }
 	}
 
