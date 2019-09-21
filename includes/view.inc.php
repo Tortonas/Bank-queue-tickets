@@ -114,8 +114,19 @@
             echo "<form method='POST'>";
             echo "<h3>Sekantis klientas - <span style='color:#ff4251'>" .$name." ".$lastname."</span> su numeriu <span style='color:#ff4251'>".$visit_id
                 ."</span> Skirtas laikas - <span style='color:#ff4251'>".$estimatedTime."</span> minutės.</h3>";
+            echo "<button name='clientServicedStart'>Klientas pradėtas aptarnauti</button>";
             echo "<button name='clientServiced'>Klientas aptarnautas</button>";
             echo "</form>";
+        }
+
+        public function printYouCannotSkipClient()
+        {
+            echo "Kliento vizitas dar neprasidėjas, jo užbaigti negalima!";
+        }
+
+        public function printPreviousClientTime($time)
+        {
+            echo "Paskutinis vizitas truko - ".$time;
         }
 	}
 

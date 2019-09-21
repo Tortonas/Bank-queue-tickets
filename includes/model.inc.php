@@ -11,6 +11,7 @@
 
 		function __construct()
 		{
+            date_default_timezone_set("Europe/Vilnius");
             $dbConfigFile = fopen("./includes/database.config", "r") or die("Unable to open file!");
 
             $dbConfigFileString =  fgets($dbConfigFile);
@@ -168,7 +169,7 @@
 
         public function readAndPrintVisits()
         {
-            $sql = "SELECT visits.id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id ORDER BY visits.id LIMIT 10";
+            $sql = "SELECT visits.id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' ORDER BY visits.id LIMIT 10";
 
             $result = $this->conn->query($sql);
 
@@ -178,9 +179,7 @@
 
         public function calculateLeftTime()
         {
-            // Check if I even need to calculate left time (if client has ticket)
-
-            $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id ORDER BY visit_id LIMIT 10";
+            $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, serviced name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' ORDER BY visit_id LIMIT 10";
             $result = $this->conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -210,21 +209,61 @@
 
         public function getNextWaitingClient()
         {
-            $sql = "SELECT visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients on visits.client_id = clients.id ORDER BY visit_id";
+            $sql = "SELECT visits.id as visit_id, estimatedTime, name, lastname, serviced FROM visits INNER JOIN clients on visits.client_id = clients.id WHERE serviced='0' ORDER BY visit_id";
             $result = $this->conn->query($sql);
-
+            $viewHandler = new ViewHandler();
+            $visitId = NULL;
             if ($result->num_rows > 0)
             {
                 while($row = $result->fetch_assoc())
                 {
-                    $viewHandler = new ViewHandler();
                     $viewHandler->printNextClientForm($row['name'], $row['lastname'], $row['visit_id'], $row['estimatedTime']);
+                    $visitId = $row['visit_id'];
+                    $currentTime = date('Y-m-d H:i:s');
+
+                    if(isset($_POST['clientServicedStart']))
+                    {
+                        $sqlStartVisit = "UPDATE visits SET visitStarted='$currentTime' WHERE id='$visitId'";
+                        $this->sendQuery($sqlStartVisit);
+                        $viewHandler->redirect_to_another_page("/main-specialist.php", 0);
+                    }
                     if(isset($_POST['clientServiced']))
                     {
-                        $visitId = $row['visit_id'];
-                        $sqlDelete = "DELETE FROM visits WHERE id='$visitId'";
-                        $this->sendQuery($sqlDelete);
-                        $viewHandler->redirect_to_another_page("/main-specialist.php", 0); // basically page reload
+                        //Checks if even visit started
+                        $sqlCheckIfVisitStarted = "SELECT visitStarted FROM visits WHERE id='$visitId' LIMIT 1";
+
+                        $result = $this->conn->query($sqlCheckIfVisitStarted);
+                        $canIServiceTheClient = false;
+
+                        if ($result->num_rows > 0)
+                        {
+                            while($row = $result->fetch_assoc())
+                            {
+                                if($row['visitStarted'] == NULL)
+                                {
+                                    $canIServiceTheClient = false;
+                                }
+                                else
+                                {
+                                    $canIServiceTheClient = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            echo "Unexpected error in getNextWaitingClient() this shouldn't have happened.";
+                        }
+
+                        if($canIServiceTheClient)
+                        {
+                            $sqlServiced = "UPDATE visits SET serviced='1', visitEnded='$currentTime' WHERE id='$visitId'";
+                            $this->sendQuery($sqlServiced);
+                            $viewHandler->redirect_to_another_page("/main-specialist.php", 0); // basically page reload
+                        }
+                        else
+                        {
+                            $viewHandler->printYouCannotSkipClient();
+                        }
                     }
                     break;
                 }
@@ -233,6 +272,39 @@
             {
                 $viewHandler = new ViewHandler();
                 $viewHandler->informAboutEmptyQueue();
+            }
+
+
+            $previousVisitId = $visitId - 1;
+
+            if($previousVisitId < 0)
+            {
+                $sqlGetLastVisitId = "SELECT id FROM visits ORDER BY id DESC LIMIT 1";
+                $result = $this->conn->query($sqlGetLastVisitId);
+                while($row = $result->fetch_assoc())
+                {
+                    $previousVisitId = $row['id'];
+                    break;
+                }
+            }
+
+            $sqlGetTimeStamps = "SELECT visitStarted, visitEnded FROM visits WHERE id='$previousVisitId' LIMIT 1";
+
+            $result = $this->conn->query($sqlGetTimeStamps);
+
+            if ($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $visitStart = new DateTime($row['visitStarted']);
+                    $visitEnd = new DateTime($row['visitEnded']);
+                    $difference = $visitStart->diff($visitEnd);
+
+                    $timeDiff = $difference->format('%H:%I:%S');
+
+                    $viewHandler->printPreviousClientTime($timeDiff);
+                    break;
+                }
             }
         }
 	}
