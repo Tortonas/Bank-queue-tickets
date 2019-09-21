@@ -11,10 +11,17 @@
 
 		function __construct()
 		{
-			$this->server = "localhost";
-			$this->dbName = "u429721638_nfq";
-			$this->dbUser = "root";
-			$this->dbPassword = "";
+            $dbConfigFile = fopen("./includes/database.config", "r") or die("Unable to open file!");
+
+            $dbConfigFileString =  fgets($dbConfigFile);
+            $dbConfigLines = explode(":", $dbConfigFileString);
+
+            fclose($dbConfigFile);
+			$this->server = $dbConfigLines[0];
+            $this->dbUser = $dbConfigLines[1];
+            $this->dbPassword = $dbConfigLines[2];
+			$this->dbName = $dbConfigLines[3];
+
 
 			$this->conn = new mysqli($this->server, $this->dbUser, $this->dbPassword, $this->dbName);
 
