@@ -54,7 +54,7 @@
                      <form method="POST">
                         <input name="username" type="text" placeholder="Vartotojo vardas"></input><br> 
                         <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
-                        <button name="loginButton">Prisijungti</button><br>
+                        <button name="loginButton" class="main-button">Prisijungti</button><br>
                         <a href="register.php">Neesate užisiregistravę? Užsiregistruokite!</a>
                      </form>
                     <?php

@@ -344,7 +344,8 @@
             $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' ORDER BY visit_id";
             $result = $this->conn->query($sql);
 
-            if ($result->num_rows > 0) {
+            if ($result->num_rows > 0)
+            {
                 $estimatedTimeLeft = 0;
                 $howManyClientsInFront = 0;
                 while($row = $result->fetch_assoc())
@@ -386,6 +387,10 @@
                         $howManyClientsInFront++;
                     }
                 }
+            }
+            else
+            {
+                echo "nothing";
             }
         }
 	}

@@ -57,7 +57,7 @@
                         <input name="lastName" type="text" placeholder="Pavardė"></input><br> 
                         <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
                         <input name="password-repeat" type="password" placeholder="Pakartokite slaptažodį"></input><br> 
-                        <button name="loginButton">Registruotis</button><br>
+                        <button name="loginButton" class="main-button">Registruotis</button><br>
                     </form>
                     <?php
                         if(isset($_POST['loginButton']))
