@@ -152,6 +152,50 @@
         {
             echo "<span style='color:red'>Vizito numeris nerastas!</span>";
         }
+
+        public function printNavigationBar()
+        {
+            $userHandler = new UserHandler();
+            if($_SESSION['loginStatus'] == "0")
+            {
+                $this->printClientLoginButton();
+                $this->printSpecialistLoginButton();
+            }
+            else
+            {
+                $this->printLogOutButton();
+                if($_SESSION['loginStatus'] == "client")
+                    $this->printClientZoneButton();
+                else
+                    $this->printSpecialistZoneButton();
+                if(isset($_GET['logout']))
+                {
+                    $userHandler->logout();
+                    $this->redirect_to_another_page("index.php", 0);
+                }
+            }
+            $this->printMainMenuButton();
+        }
+
+        public function onlyClientCanSeeThis()
+        {
+            if($_SESSION['loginStatus'] != "client")
+            {
+                $this->printYouCannotAccess(); // TODO: This text is bugged at the top of navbar, fix using CSS.
+                $this->redirect_to_another_page("index.php", 0);
+                die();
+            }
+        }
+
+        public function onlySpecialistCanSeeThis()
+        {
+            if($_SESSION['loginStatus'] != "specialist")
+            {
+                $this->printYouCannotAccess(); // TODO: This text is bugged at the top of navbar, fix using CSS.
+                $this->redirect_to_another_page("index.php", 0);
+                die();
+            }
+        }
 	}
 
 ?>

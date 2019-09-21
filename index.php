@@ -24,26 +24,8 @@
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
                 <?php
-                    $userHandler = new UserHandler();
-                    if($_SESSION['loginStatus'] == "0")
-                    {
-                        $viewHandler->printClientLoginButton();
-                        $viewHandler->printSpecialistLoginButton();
-                    }
-                    else
-                    {
-                       $viewHandler->printLogOutButton();
-                       if($_SESSION['loginStatus'] == "client")
-                            $viewHandler->printClientZoneButton();
-                       else
-                           $viewHandler->printSpecialistZoneButton();
-                        if(isset($_GET['logout']))
-                        {
-                            $userHandler->logout();
-                            $viewHandler->redirect_to_another_page("index.php", 0);
-                        }
-                    }
-                    $viewHandler->printMainMenuButton();
+                    $viewHandler = new ViewHandler();
+                    $viewHandler->printNavigationBar();
                 ?>
             </div>
         </nav>

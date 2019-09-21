@@ -23,34 +23,9 @@
             <div class="wrapper">
                 <img class="main-icon" src="./img/bank.png" alt="github logo">
                 <?php
-                $userHandler = new UserHandler();
-                $viewHandler = new ViewHandler();
-                if($_SESSION['loginStatus'] == "0")
-                {
-                    $viewHandler->printClientLoginButton();
-                    $viewHandler->printSpecialistLoginButton();
-                }
-                else
-                {
-                    $viewHandler->printLogOutButton();
-                    if($_SESSION['loginStatus'] == "client")
-                        $viewHandler->printClientZoneButton();
-                    else
-                        $viewHandler->printSpecialistZoneButton();
-                    if(isset($_GET['logout']))
-                    {
-                        $userHandler->logout();
-                        $viewHandler->redirect_to_another_page("index.php", 0);
-                    }
-                }
-                $viewHandler->printMainMenuButton();
-
-                if($_SESSION['loginStatus'] != "client")
-                {
-                    $viewHandler->printYouCannotAccess(); // TODO: This text is bugged at the top of navbar, fix using CSS.
-                    $viewHandler->redirect_to_another_page("index.php", 0);
-                    die();
-                }
+                    $viewHandler = new ViewHandler();
+                    $viewHandler->printNavigationBar();
+                    $viewHandler->onlyClientCanSeeThis();
                 ?>
             </div>
         </nav>
@@ -59,6 +34,7 @@
                 <div class="client-main">
                     <?php
                         $dbModel = new DB_Model();
+                        $userHandler = new UserHandler();
                         $viewHandler->printTicketReceptionForm();
                         if(isset($_GET['registerReceipt']))
                         {
