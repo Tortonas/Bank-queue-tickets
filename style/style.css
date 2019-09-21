@@ -98,6 +98,10 @@ main {
     background-color: #137eaf;
 }
 
+.cancelVisitForm{
+    margin-top: 50px;
+}
+
 .login-screen {
     width: 100%;
 }

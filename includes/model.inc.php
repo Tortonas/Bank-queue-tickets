@@ -409,8 +409,76 @@
             }
             else
             {
-                echo "nothing";
+                echo "Unexpected error in checkEstimatedTimeById().";
             }
+        }
+
+        public function checkIfICanRegisterForTicket($userInputEstimatedTime)
+        {
+            $userHandler = new UserHandler();
+            $viewHandler = new ViewHandler();
+
+            $returnValueBool = $userHandler->checkIfPositiveNumber($userInputEstimatedTime);
+
+            if($returnValueBool)
+            {
+                if($userInputEstimatedTime < 60)
+                {
+                    $clientId = $_SESSION['clientId'];
+                    $sqlCheckCurrentRegistrations = "SELECT * FROM visits WHERE serviced=0 AND client_id='$clientId'";
+                    $result = $this->conn->query($sqlCheckCurrentRegistrations);
+
+                    $isThereAnyDuplicate = false;
+
+                    if ($result->num_rows > 0)
+                    {
+                        while($row = $result->fetch_assoc())
+                        {
+                            $isThereAnyDuplicate = true;
+                        }
+                    }
+
+                    if($isThereAnyDuplicate)
+                    {
+                        $viewHandler->printThatYouAlreadyHaveANumber(5);
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    $viewHandler->pleaseUseLimitedRanges(60);
+                    return false;
+                }
+            }
+            else
+            {
+                $viewHandler->printRandomError();
+                return false;
+            }
+        }
+
+        public function checkIfIveRegisteredForTicket()
+        {
+            $clientId = $_SESSION['clientId'];
+            $sqlCheckCurrentRegistrations = "SELECT * FROM visits WHERE serviced=0 AND client_id='$clientId'";
+            $result = $this->conn->query($sqlCheckCurrentRegistrations);
+
+            $myTicketId = -1;
+
+            if ($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $myTicketId = $row['id'];
+                    break;
+                }
+            }
+
+            return $myTicketId;
         }
 	}
 

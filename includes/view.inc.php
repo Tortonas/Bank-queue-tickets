@@ -202,6 +202,24 @@
             echo '                <a href="https://github.com/Tortonas/Bank-queue-tickets" target="_blank"><img class="icon" src="./img/github.png" alt="github logo"></a>
                 <h4>Project was done by Valentinas Kasteckis 2019</h4>';
         }
+
+        public function printThatYouAlreadyHaveANumber($number)
+        {
+            echo "<span style='color:red'>Jūs jau esate užsiregistravę! Jūsų vizito numeris numeris - ".$number."</span>";
+        }
+
+        public function pleaseUseLimitedRanges($number)
+        {
+            echo "<span style='color:red'>Nutiko klaida, prašome pasirinkti minutes maksimaliai iki ".$number.".</span>";
+        }
+
+        public function printCancelVisitForm($ticketId)
+        {
+            echo "<form class='cancelVisitForm' method='POST'>
+<h3>Jūs esate užsiregistravę, jūsų talonėlio numeris yra - <span style='color:red'>$ticketId</span></h3>
+<button name='cancelVisit' class='main-button'>Atšaukti vizitą</button>
+</form>";
+        }
 	}
 
 ?>

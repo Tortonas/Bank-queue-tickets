@@ -34,20 +34,14 @@
                 <div class="client-main">
                     <?php
                         $dbModel = new DB_Model();
-                        $userHandler = new UserHandler();
                         $viewHandler->printTicketReceptionForm();
                         if(isset($_GET['registerReceipt']))
                         {
-                            // TODO: Ar reikia neleisti klientui regintis kiek nori kartu?
-                            $returnValueBool = $userHandler->checkIfPositiveNumber($_GET['estimatedTime']);
+                            $returnValueBool = $dbModel->checkIfICanRegisterForTicket($_GET['estimatedTime']);
                             if($returnValueBool)
                             {
                                 $dbModel->registerTicket($_GET['estimatedTime']);
                                 $viewHandler->printSuccessfulRegister();
-                            }
-                            else
-                            {
-                                $viewHandler->printRandomError();
                             }
                         }
 
@@ -56,6 +50,18 @@
                         if(isset($_GET['submitTicket']))
                         {
                             $dbModel->checkEstimatedTimeById($_GET['ticketId']);
+                        }
+
+                        $returnValueBool = $dbModel->checkIfIveRegisteredForTicket();
+
+                        if($returnValueBool != -1)
+                        {
+                            $viewHandler->printCancelVisitForm($returnValueBool);
+                            if (isset($_POST['cancelVisit']))
+                            {
+                                //TODO: Padaryti cancel vizito requesta
+                                echo "clicked cancel";
+                            }
                         }
                     ?>
                 </div>
