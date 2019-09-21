@@ -48,7 +48,9 @@
 
 		public function real_escape_string($text)
 		{
-			return mysqli_real_escape_string($this->conn, $text);
+			$returnValue = mysqli_real_escape_string($this->conn, $text);
+			$returnValue = htmlentities($returnValue);
+			return $returnValue;
 		}
 
 		public function checkIfYouCanLogin($username, $password)
@@ -332,6 +334,8 @@
 
         public function checkEstimatedTimeById($id)
         {
+            $id = $this->real_escape_string($id);
+
             // Since this is re-used code from before and it searches estimated time left with client_id and I got visit_id I have to get that other variable.
             $sqlTransferClientIdToVisitId = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' AND visits.id='$id' ORDER BY visit_id";
             $result = $this->conn->query($sqlTransferClientIdToVisitId);

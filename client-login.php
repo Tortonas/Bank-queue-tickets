@@ -60,8 +60,9 @@
         </main>
         <footer>
             <div class="wrapper">
-                <a href="https://github.com/Tortonas/Bank-queue-tickets" target="_blank"><img class="icon" src="./img/github.png" alt="github logo"></a>
-                <h4>Project was done by Valentinas Kasteckis 2019</h4>
+                <?php
+                    $viewHandler->printFooterInformation();
+                ?>
             </div>
         </footer>
     </body>
