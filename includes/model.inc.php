@@ -179,11 +179,12 @@
 
         public function calculateLeftTime()
         {
-            $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, serviced name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' ORDER BY visit_id LIMIT 10";
+            $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, serviced name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' ORDER BY visit_id";
             $result = $this->conn->query($sql);
 
             if ($result->num_rows > 0) {
                 $estimatedTimeLeft = 0;
+                $howManyClientsInFront = 0;
                 while($row = $result->fetch_assoc())
                 {
                     if($_SESSION['clientId'] == $row['client_id'])
@@ -195,13 +196,32 @@
                         }
                         else
                         {
-                            $viewHandler->informAboutEstimatedLeftTime($estimatedTimeLeft);
+                            $sqlGetAverageWaitingTime = "SELECT * FROM (SELECT id, AVG(TIMESTAMPDIFF(MINUTE, visitStarted, visitEnded)) as diff FROM visits GROUP BY id) data WHERE diff IS NOT NULL";
+                            $result2 = $this->conn->query($sqlGetAverageWaitingTime);
+                            $averageWaitingTime = 0;
+                            $averageWaitingTimeCount = 0;
+                            if ($result2->num_rows > 0)
+                            {
+                                while($row = $result2->fetch_assoc())
+                                {
+                                    $averageWaitingTime = $averageWaitingTime + $row['diff'];
+                                    $averageWaitingTimeCount++;
+                                }
+                                /*if($averageWaitingTimeCount == 0)
+                                {
+                                    $averageWaitingTimeCount = 1;
+                                }*/
+                                $averageWaitingTime = $averageWaitingTime / $averageWaitingTimeCount;
+
+                                $viewHandler->informAboutEstimatedLeftTime($estimatedTimeLeft, $averageWaitingTime);
+                            }
                         }
                         break;
                     }
                     else
                     {
                         $estimatedTimeLeft = $estimatedTimeLeft + $row['estimatedTime'];
+                        $howManyClientsInFront++;
                     }
                 }
             }
@@ -304,6 +324,67 @@
 
                     $viewHandler->printPreviousClientTime($timeDiff);
                     break;
+                }
+            }
+        }
+
+        public function checkEstimatedTimeById($id)
+        {
+            // Since this is re-used code from before and it searches estimated time left with client_id and I got visit_id I have to get that other variable.
+            $sqlTransferClientIdToVisitId = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' AND visits.id='$id' ORDER BY visit_id";
+            $result = $this->conn->query($sqlTransferClientIdToVisitId);
+            if ($result->num_rows > 0)
+            {
+                while ($row = $result->fetch_assoc())
+                {
+                    $id = $row['client_id'];
+                }
+            }
+
+            $sql = "SELECT clients.id as client_id, visits.id as visit_id, estimatedTime, name, lastname FROM visits INNER JOIN clients ON client_id=clients.id WHERE serviced='0' ORDER BY visit_id";
+            $result = $this->conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                $estimatedTimeLeft = 0;
+                $howManyClientsInFront = 0;
+                while($row = $result->fetch_assoc())
+                {
+                    if($id == $row['client_id'])
+                    {
+                        $viewHandler = new ViewHandler();
+                        if($estimatedTimeLeft == 0)
+                        {
+                            $viewHandler->informClientAboutHisQueueEnd();
+                        }
+                        else
+                        {
+                            $sqlGetAverageWaitingTime = "SELECT * FROM (SELECT id, AVG(TIMESTAMPDIFF(MINUTE, visitStarted, visitEnded)) as diff FROM visits GROUP BY id) data WHERE diff IS NOT NULL";
+                            $result2 = $this->conn->query($sqlGetAverageWaitingTime);
+                            $averageWaitingTime = 0;
+                            $averageWaitingTimeCount = 0;
+                            if ($result2->num_rows > 0)
+                            {
+                                while($row = $result2->fetch_assoc())
+                                {
+                                    $averageWaitingTime = $averageWaitingTime + $row['diff'];
+                                    $averageWaitingTimeCount++;
+                                }
+                                /*if($averageWaitingTimeCount == 0)
+                                {
+                                    $averageWaitingTimeCount = 1;
+                                }*/
+                                $averageWaitingTime = $averageWaitingTime / $averageWaitingTimeCount;
+
+                                $viewHandler->informAboutEstimatedLeftTime($estimatedTimeLeft, $averageWaitingTime);
+                            }
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        $estimatedTimeLeft = $estimatedTimeLeft + $row['estimatedTime'];
+                        $howManyClientsInFront++;
+                    }
                 }
             }
         }

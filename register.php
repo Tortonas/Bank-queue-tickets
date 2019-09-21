@@ -67,12 +67,12 @@
                             if($loginReturnValue)
                             {
                                 $viewHandler = new ViewHandler();
-                                echo "Registracija sėkminga!";
+                                echo "Užregistruota sėkmingai";
                                 $viewHandler->redirect_to_another_page("client-login.php", 2);
                             }
                             else
                             {
-                                echo "Registracija nesėkminga";
+                                echo "Įvyko klaida, kreipkitės telefonu";
                             }
                         }
                     ?>

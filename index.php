@@ -54,7 +54,6 @@
                     <?php
                         $dbModel = new DB_Model();
                         $dbModel->readAndPrintVisits();
-
                         if($_SESSION['loginStatus'] == "client")
                         {
                             $dbModel->calculateLeftTime();

@@ -57,19 +57,16 @@
         <main>
             <div class="wrapper">
                 <div class="client-main">
-                    <h1>Talonėlio išdavimo punktas</h1>
-                    <form method="GET">
-                        <span> Kiek laiko planuojate užtrukt? </span><input name="estimatedTime" type="text" placeholder="Laikas"></input><br>
-                        <button name="registerReceipt" type="submit">Registruotis</button>
-                    </form>
+
                     <?php
+                        $dbModel = new DB_Model();
+                        $viewHandler->printTicketReceptionForm();
                         if(isset($_GET['registerReceipt']))
                         {
                             // TODO: Ar reikia neleisti klientui regintis kiek nori kartu?
                             $returnValueBool = $userHandler->checkIfPositiveNumber($_GET['estimatedTime']);
                             if($returnValueBool)
                             {
-                                $dbModel = new DB_Model();
                                 $dbModel->registerTicket($_GET['estimatedTime']);
                                 $viewHandler->printSuccessfulRegister();
                             }
@@ -77,6 +74,13 @@
                             {
                                 $viewHandler->printRandomError();
                             }
+                        }
+
+
+                        $viewHandler->printCheckStatusWithTicketForm();
+                        if(isset($_GET['submitTicket']))
+                        {
+                            $dbModel->checkEstimatedTimeById($_GET['ticketId']);
                         }
                     ?>
                 </div>

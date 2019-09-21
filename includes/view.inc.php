@@ -99,9 +99,10 @@
             echo "<h4 style='color:green'>Jūsų eilė atėjo! :)</h4>";
         }
 
-        public function informAboutEstimatedLeftTime($time)
+        public function informAboutEstimatedLeftTime($time, $time2)
         {
             echo "<h4 style='color:#ff4643'>Likęs laikas: " .$time." minutės!</h4>";
+            echo "<h4 style='color:#ff4643'>Likęs apytikslis pagal vidurki: " .$time2." minutės!</h4>";
         }
 
         public function informAboutEmptyQueue()
@@ -127,6 +128,24 @@
         public function printPreviousClientTime($time)
         {
             echo "Paskutinis vizitas truko - ".$time;
+        }
+
+        public function printTicketReceptionForm()
+        {
+            echo '<h1>Talonėlio išdavimo punktas</h1>
+                    <form method="GET">
+                        <span> Kiek laiko planuojate užtrukt? </span><input name="estimatedTime" type="text" placeholder="Laikas"></input><br>
+                        <button name="registerReceipt" type="submit">Registruotis</button>
+                    </form>';
+        }
+
+        public function printCheckStatusWithTicketForm()
+        {
+            echo "<h1>Pasitikrinkite apytiksli laukimo laiką</h1>";
+            echo "<form method='GET'>";
+            echo "Suveskite talonėlio NR <input name='ticketId' placeholder='Talonėlio numeris'><br>";
+            echo "<button name='submitTicket'>Patikrinti</button>";
+            echo "</form>";
         }
 	}
 
