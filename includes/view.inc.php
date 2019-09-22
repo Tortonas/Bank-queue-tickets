@@ -319,7 +319,14 @@
         public function printBusiestTime($hour, $percent)
         {
             $percent = round($percent);
-            echo "<h4>$hour valanda užimtumas yra - <span style='color:red'>$percent%</span></h4>";
+            if($percent == 0)
+            {
+                echo "<h4>$hour valanda užimtumas yra - <span style='color:green'>$percent%</span></h4>";
+            }
+            else
+            {
+                echo "<h4>$hour valanda užimtumas yra - <span style='color:red'>$percent%</span></h4>";
+            }
         }
 	}
 

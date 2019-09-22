@@ -577,7 +577,7 @@
 
             $fullCountOfEveryVisit = $result->num_rows;
             $viewHandler = new ViewHandler();
-            for ($i = 8; $i <= 17; $i++)
+            for ($i = 0; $i <= 23; $i++)
             {
                 $sqlGetCountOfSpecificHour = "SELECT * FROM visits WHERE HOUR(visitStarted) = '$i'";
                 $result = $this->conn->query($sqlGetCountOfSpecificHour);

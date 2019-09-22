@@ -32,7 +32,7 @@
         <main>
             <div class="wrapper">
                 <div class="waiting-box">
-                    <h1>Laukiančiųjų eilė ir apytikslis laukimo laikas</h1>
+                    <h1>Pirmiausių 10 klientų eilė</h1>
                     <?php
                         $dbModel = new DB_Model();
                         $dbModel->readAndPrintVisits();
