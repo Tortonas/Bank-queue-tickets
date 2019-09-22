@@ -220,6 +220,11 @@
 <button name='cancelVisit' class='main-button'>Atšaukti vizitą</button>
 </form>";
         }
+
+        public function visitCancelSuccessful()
+        {
+            echo "<span style='color:red'>Vizitas buvo sėkmingai atšauktas!</span>";
+        }
 	}
 
 ?>

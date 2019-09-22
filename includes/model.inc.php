@@ -429,18 +429,21 @@
                     $result = $this->conn->query($sqlCheckCurrentRegistrations);
 
                     $isThereAnyDuplicate = false;
+                    $currentVisitId = -1;
 
                     if ($result->num_rows > 0)
                     {
                         while($row = $result->fetch_assoc())
                         {
                             $isThereAnyDuplicate = true;
+                            $currentVisitId = $row['id'];
                         }
                     }
 
                     if($isThereAnyDuplicate)
                     {
-                        $viewHandler->printThatYouAlreadyHaveANumber(5);
+
+                        $viewHandler->printThatYouAlreadyHaveANumber($currentVisitId);
                         return false;
                     }
                     else
@@ -479,6 +482,12 @@
             }
 
             return $myTicketId;
+        }
+
+        public function cancelMyVisit($visitId)
+        {
+            $sql = "DELETE FROM visits WHERE id='$visitId'";
+            $this->sendQuery($sql);
         }
 	}
 

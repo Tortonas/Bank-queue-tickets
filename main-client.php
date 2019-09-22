@@ -59,8 +59,9 @@
                             $viewHandler->printCancelVisitForm($returnValueBool);
                             if (isset($_POST['cancelVisit']))
                             {
-                                //TODO: Padaryti cancel vizito requesta
-                                echo "clicked cancel";
+                                $dbModel->cancelMyVisit($returnValueBool);
+                                $viewHandler->visitCancelSuccessful();
+                                $viewHandler->redirect_to_another_page("main-client.php", 1); // page reload
                             }
                         }
                     ?>
