@@ -75,7 +75,17 @@
 
         public function printSuccessfulRegister()
         {
-            echo "Jūsų laikas sėkmingai užregistruotas!";
+            echo "Užregistruota sėkmingai";
+        }
+
+        public function printThisUsernameTaken()
+        {
+            echo "Šis slapyvardis jau užimtas. ";
+        }
+
+        public function printErrorWhileRegistering()
+        {
+            echo "Nutiko klaida, kreipkitės telefonu";
         }
 
         public function printWaitingPeopleList($peopleList)

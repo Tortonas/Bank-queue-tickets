@@ -24,12 +24,17 @@
 			if($password != $password_repeat)
 				return false;
 
-			$dbModel = new DB_Model();
+            $dbModel = new DB_Model();
 
-			$username = $dbModel->real_escape_string($username);
-			$name = $dbModel->real_escape_string($name);
-			$lastname = $dbModel->real_escape_string($lastname);
-			$password = $dbModel->real_escape_string($password);
+            $username = $dbModel->real_escape_string($username);
+            $name = $dbModel->real_escape_string($name);
+            $lastname = $dbModel->real_escape_string($lastname);
+            $password = $dbModel->real_escape_string($password);
+
+			if(!($dbModel->checkIfYouCanRegisterWithThisUsername($username)))
+            {
+                return false;
+            }
 
 			$dbModel->sendQuery("INSERT INTO clients (username, name, lastname, password) VALUES ('$username', '$name', '$lastname', '$password')");
 

@@ -48,12 +48,12 @@
                             if($loginReturnValue)
                             {
                                 $viewHandler = new ViewHandler();
-                                echo "Užregistruota sėkmingai";
+                                $viewHandler->printSuccessfulRegister();
                                 $viewHandler->redirect_to_another_page("client-login.php", 2);
                             }
                             else
                             {
-                                echo "Įvyko klaida, kreipkitės telefonu";
+                                $viewHandler->printErrorWhileRegistering();
                             }
                         }
                     ?>

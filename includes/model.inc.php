@@ -489,6 +489,34 @@
             $sql = "DELETE FROM visits WHERE id='$visitId'";
             $this->sendQuery($sql);
         }
+
+        public function checkIfYouCanRegisterWithThisUsername($username)
+        {
+            $sql = "SELECT * FROM clients WHERE username='$username'";
+
+            $result = $this->conn->query($sql);
+
+            $isThisUsernameTaken = false;
+
+            if ($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $isThisUsernameTaken = true;
+                }
+            }
+
+            if($isThisUsernameTaken)
+            {
+                $viewHandler = new ViewHandler();
+                $viewHandler->printThisUsernameTaken();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 	}
 
 ?>
