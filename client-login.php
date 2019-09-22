@@ -17,6 +17,7 @@
         <meta name="description" content="Banking queue tickets allows you to track the time until your queue is over.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./style/style.css">
+        <link rel="shortcut icon" type="image/png" href="./img/bank.png"/>
     </head>
     <body>
         <nav>

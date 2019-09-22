@@ -62,7 +62,7 @@
 
         public function printYouCannotAccess()
         {
-            echo "Jūs negalite matyti šio puslapio!";
+            echo "Jūs negalite matyti šio puslapio! Vyksta autorizavimas!";
         }
 
         public function saluteMember()
@@ -203,7 +203,7 @@
         {
             if($_SESSION['loginStatus'] != "client")
             {
-                $this->printYouCannotAccess(); // TODO: This text is bugged at the top of navbar, fix using CSS.
+                $this->printYouCannotAccess();
                 $this->redirect_to_another_page("index.php", 0);
                 die();
             }
@@ -213,7 +213,7 @@
         {
             if($_SESSION['loginStatus'] != "specialist")
             {
-                $this->printYouCannotAccess(); // TODO: This text is bugged at the top of navbar, fix using CSS.
+                $this->printYouCannotAccess();
                 $this->redirect_to_another_page("index.php", 0);
                 die();
             }
