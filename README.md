@@ -11,7 +11,7 @@ This project was made for the entrance to <b>NFQ academy</b>. Task can be found 
 5. Write your database information in this principle <b>HOST_SERVER:DB_USER:DB_PASSWORD:DB_NAME</b> for example <b>localhost:root::you_db_name</b>
 6. You are good to go. Temporary spcialist loggings are username: <b>admin</b> and password: <b>admin</b>.
 
-# User/Admin guide
+# User/Specialist guide
 
 1. You can register as a User by pressing <b>Prisijungti kaip klientui</b> on the navigation bar and then pressing <b>Neesate užisiregistravę? Užsiregistruokite!</b>
 2. You can log in with the credentials you just created
