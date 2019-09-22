@@ -31,13 +31,8 @@
         <main>
             <div class="wrapper">
                 <div class="login-screen">
-                    <h1>Specialisto prisijungimo langas</h1>
-                    <form method="POST">
-                        <input name="username" type="text" placeholder="Vartotojo vardas"></input><br> 
-                        <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
-                        <button name="loginButton" class="main-button">Prisijungti</button><br>
-                    </form>
                     <?php
+                    $viewHandler->printSpecialistLoginForm();
                     if(isset($_POST['loginButton']))
                     {
                         $userHandler = new UserHandler();

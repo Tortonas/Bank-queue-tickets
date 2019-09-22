@@ -31,14 +31,8 @@
         <main>
             <div class="wrapper">
                 <div class="login-screen">
-                    <h1>Kliento prisijungimo langas</h1>
-                     <form method="POST">
-                        <input name="username" type="text" placeholder="Vartotojo vardas"></input><br> 
-                        <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
-                        <button name="loginButton" class="main-button">Prisijungti</button><br>
-                        <a href="register.php">Neesate užisiregistravę? Užsiregistruokite!</a>
-                     </form>
                     <?php
+                        $viewHandler->printClientLoginForm();
                         if(isset($_POST['loginButton']))
                         {
                             $userHandler = new UserHandler();

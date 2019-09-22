@@ -422,7 +422,7 @@
 
             if($returnValueBool)
             {
-                if($userInputEstimatedTime < 60)
+                if($userInputEstimatedTime <= 60)
                 {
                     $clientId = $_SESSION['clientId'];
                     $sqlCheckCurrentRegistrations = "SELECT * FROM visits WHERE serviced=0 AND client_id='$clientId'";

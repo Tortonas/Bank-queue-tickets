@@ -30,26 +30,9 @@
         </nav>
         <main>
             <div class="wrapper">
-                <div class="login-screen">
-                    <?php
-                        $viewHandler->printRegisterForm();
-                        if(isset($_POST['loginButton']))
-                        {
-                            $userHandler = new UserHandler(); 
-                            $loginReturnValue = $userHandler->register($_POST['username'], $_POST['name'], $_POST['lastName'], $_POST['password'], $_POST['password-repeat']);
-                            if($loginReturnValue)
-                            {
-                                $viewHandler = new ViewHandler();
-                                $viewHandler->printSuccessfulRegister();
-                                $viewHandler->redirect_to_another_page("client-login.php", 2);
-                            }
-                            else
-                            {
-                                $viewHandler->printErrorWhileRegistering();
-                            }
-                        }
-                    ?>
-                </div>
+                <?php
+                    echo "soon";
+                ?>
             </div>
         </main>
         <footer>

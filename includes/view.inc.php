@@ -18,6 +18,13 @@
                 </form>';
         }
 
+        public function printStatisticsButton()
+        {
+            echo '<form action="statistics.php">
+                    <button>Statistika</button>
+                </form>';
+        }
+
         public function printClientLoginButton()
         {
             echo '<form action="client-login.php">
@@ -142,18 +149,22 @@
 
         public function printTicketReceptionForm()
         {
+            $estimatedTime = NULL;
+            if(isset($_GET['estimatedTime'])) { $estimatedTime = $_GET['estimatedTime']; }
             echo '<h1>Talonėlio išdavimo punktas</h1>
                     <form method="GET">
-                        <span> Kiek laiko planuojate užtrukt? </span><input name="estimatedTime" type="text" placeholder="Laikas"></input><br>
+                        <span> Kiek laiko planuojate užtrukt? </span><input name="estimatedTime" type="text" placeholder="Laikas" value="'.$estimatedTime.'"></input><br>
                         <button name="registerReceipt" type="submit" class="main-button">Registruotis</button>
                     </form>';
         }
 
         public function printCheckStatusWithTicketForm()
         {
+            $ticketId = NULL;
+            if(isset($_GET['ticketId'])) { $ticketId = $_GET['ticketId']; }
             echo "<h1>Pasitikrinkite apytiksli laukimo laiką</h1>";
             echo "<form method='GET'>";
-            echo "Suveskite talonėlio NR <input name='ticketId' placeholder='Talonėlio numeris'><br>";
+            echo "Suveskite talonėlio NR <input name='ticketId' placeholder='Talonėlio numeris' value='".$ticketId."'><br>";
             echo "<button name='submitTicket' class='main-button'>Patikrinti</button>";
             echo "</form>";
         }
@@ -184,6 +195,7 @@
                     $this->redirect_to_another_page("index.php", 0);
                 }
             }
+            $this->printStatisticsButton();
             $this->printMainMenuButton();
         }
 
@@ -237,6 +249,51 @@
                 <h3>Manote nespėsite? Galite pavėlinti savo apsilankymo laiką!</h3>
                 <button name='delayVisit' class='main-button'>Pavėlinti</button>
                 </form>";
+        }
+
+        public function printRegisterForm()
+        {
+            $username = NULL;
+            $name = NULL;
+            $lastName = NULL;
+            if(isset($_POST['username'])) { $username = $_POST['username']; }
+            if(isset($_POST['name'])) { $name = $_POST['name']; }
+            if(isset($_POST['lastName'])) { $lastName = $_POST['lastName']; }
+
+            echo '<h1>Kliento registracija</h1>
+                    <form method="POST">
+                        <input name="username" type="text" placeholder="Vartotojo vardas" value="'.$username.'"></input><br> 
+                        <input name="name" type="text" placeholder="Vardas" value="'.$name.'"></input><br> 
+                        <input name="lastName" type="text" placeholder="Pavardė" value="'.$lastName.'"></input><br> 
+                        <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
+                        <input name="password-repeat" type="password" placeholder="Pakartokite slaptažodį"></input><br> 
+                        <button name="loginButton" class="main-button">Registruotis</button><br>
+                    </form>';
+        }
+
+        public function printClientLoginForm()
+        {
+            $username = NULL;
+            if(isset($_POST['username'])) { $username = $_POST['username']; }
+            echo '                    <h1>Kliento prisijungimo langas</h1>
+                     <form method="POST">
+                        <input name="username" type="text" placeholder="Vartotojo vardas" value="'.$username.'"></input><br> 
+                        <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
+                        <button name="loginButton" class="main-button">Prisijungti</button><br>
+                        <a href="register.php">Neesate užisiregistravę? Užsiregistruokite!</a>
+                     </form>';
+        }
+
+        public function printSpecialistLoginForm()
+        {
+            $username = NULL;
+            if(isset($_POST['username'])) { $username = $_POST['username']; }
+            echo '                    <h1>Specialisto prisijungimo langas</h1>
+                    <form method="POST">
+                        <input name="username" type="text" placeholder="Vartotojo vardas" value="'.$username.'"></input><br> 
+                        <input name="password" type="password" placeholder="Slaptažodis"></input><br> 
+                        <button name="loginButton" class="main-button">Prisijungti</button><br>
+                    </form>';
         }
 
         public function visitCancelSuccessful()
