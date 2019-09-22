@@ -1,7 +1,12 @@
+# Block includes if they have a .inc.php extension. Change
+# that to match whatever extension you use for your includes.
+<Files *.inc.php>
+Order Deny,Allow
+Deny from All
+</Files>
 
-# DO NOT REMOVE THIS LINE AND THE LINES BELOW SSL_REDIRECT:nfq.kasteckis.com
-RewriteEngine on
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} ^nfq.kasteckis.com$
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-# DO NOT REMOVE THIS LINE AND THE LINES ABOVE SSL_REDIRECT:nfq.kasteckis.com
+# Block access to .config files
+<Files *.config>
+Order Deny,Allow
+Deny from All
+</Files>
