@@ -63,6 +63,24 @@
                                 $viewHandler->visitCancelSuccessful();
                                 $viewHandler->redirect_to_another_page("main-client.php", 1); // page reload
                             }
+
+                            $viewHandler->printDelayVisitForm();
+
+                            if(isset($_POST['delayVisit']))
+                            {
+                                $canIDelayVisit = $dbModel->canIDelayMyVisit($returnValueBool);
+
+                                if($canIDelayVisit)
+                                {
+                                    $newVisitId = $dbModel->delayVisit($returnValueBool);
+                                    $viewHandler->printSuccesfullDelay($newVisitId);
+                                    $viewHandler->redirect_to_another_page('main-client.php', 1);
+                                }
+                                else
+                                {
+                                    $viewHandler->printYouCannotDelayVisit();
+                                }
+                            }
                         }
                     ?>
                 </div>

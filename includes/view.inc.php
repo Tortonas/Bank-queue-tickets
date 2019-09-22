@@ -226,14 +226,32 @@
         public function printCancelVisitForm($ticketId)
         {
             echo "<form class='cancelVisitForm' method='POST'>
-<h3>Jūs esate užsiregistravę, jūsų talonėlio numeris yra - <span style='color:red'>$ticketId</span></h3>
-<button name='cancelVisit' class='main-button'>Atšaukti vizitą</button>
-</form>";
+                <h3>Jūs esate užsiregistravę, jūsų talonėlio numeris yra - <span style='color:red'>$ticketId</span></h3>
+                <button name='cancelVisit' class='main-button'>Atšaukti vizitą</button>
+                </form>";
+        }
+
+        public function printDelayVisitForm()
+        {
+            echo "<form method='POST'>
+                <h3>Manote nespėsite? Galite pavėlinti savo apsilankymo laiką!</h3>
+                <button name='delayVisit' class='main-button'>Pavėlinti</button>
+                </form>";
         }
 
         public function visitCancelSuccessful()
         {
             echo "<span style='color:red'>Vizitas buvo sėkmingai atšauktas!</span>";
+        }
+
+        public function printSuccesfullDelay($number)
+        {
+            echo "Jūsų vizitas buvo pavėlintas, jūsų naujas vizito numeris - ".$number;
+        }
+
+        public function printYouCannotDelayVisit()
+        {
+            echo "<span style='color:red'>Kadangi jūs esate paskutinis eilėje, pavėlinti savo apsilankymo negalite.</span>";
         }
 	}
 

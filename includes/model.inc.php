@@ -517,6 +517,58 @@
                 return true;
             }
         }
+
+        public function delayVisit($visitId)
+        {
+            $sqlGetSecondId = "SELECT * FROM visits WHERE id>'$visitId' LIMIT 1";
+
+            $result = $this->conn->query($sqlGetSecondId);
+            $nextVisitId = -1;
+
+            if ($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $nextVisitId = $row['id'];
+                    break;
+                }
+            }
+
+            $sqlSetFirstVisitIdToZero = "UPDATE visits SET id = '0' WHERE visits.id = '$visitId'";
+            $sqlSetSecondVisitIdToPrevious = "UPDATE visits SET id = '$visitId' WHERE visits.id = '$nextVisitId'";
+            $sqlSetPreviousIdToNext = "UPDATE visits SET id = '$nextVisitId' WHERE visits.id = '0';";
+
+            $this->sendQuery($sqlSetFirstVisitIdToZero);
+            $this->sendQuery($sqlSetSecondVisitIdToPrevious);
+            $this->sendQuery($sqlSetPreviousIdToNext);
+
+            return $nextVisitId;
+        }
+
+        public function canIDelayMyVisit($visitId)
+        {
+            $sql = "SELECT * FROM visits where id>'$visitId'";
+            $result = $this->conn->query($sql);
+
+            $amITheLastOne = true;
+
+            if ($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $amITheLastOne = false;
+                }
+            }
+
+            if($amITheLastOne)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 	}
 
 ?>
