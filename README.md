@@ -15,7 +15,7 @@ This project was made for the entrance to <b>NFQ academy</b>. Task can be found 
 
 1. You can register as a User by pressing <b>Prisijungti kaip klientui</b> on the navigation bar and then pressing <b>Neesate užisiregistravę? Užsiregistruokite!</b>
 2. You can log in with the credentials you just created
-3. Go to client zone by clicking on <b>Client zone</b>
+3. Go to client zone by clicking on <b>Kliento zona</b>
 4. Write the estimated time you will be there and click <b>Registruotis</b>
 5. You can write your number to see the estimated waiting time left.
 6. You can cancel your visit by clicking on <b>Atšaukti vizitą</b>
