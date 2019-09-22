@@ -251,6 +251,11 @@
                 </form>";
         }
 
+        public function printBusiestStatistics()
+        {
+            echo '<h1>Kada labiausiai esame užimti</h1>';
+        }
+
         public function printRegisterForm()
         {
             $username = NULL;
@@ -309,6 +314,12 @@
         public function printYouCannotDelayVisit()
         {
             echo "<span style='color:red'>Kadangi jūs esate paskutinis eilėje, pavėlinti savo apsilankymo negalite.</span>";
+        }
+
+        public function printBusiestTime($hour, $percent)
+        {
+            $percent = round($percent);
+            echo "<h4>$hour valanda užimtumas yra - <span style='color:red'>$percent%</span></h4>";
         }
 	}
 

@@ -569,6 +569,23 @@
                 return true;
             }
         }
+
+        public function getInformationAboutBusiestDays()
+        {
+            $sqlGetCountOfAllVisits = 'SELECT * FROM visits WHERE HOUR(visitStarted) IS NOT NULL';
+            $result = $this->conn->query($sqlGetCountOfAllVisits);
+
+            $fullCountOfEveryVisit = $result->num_rows;
+            $viewHandler = new ViewHandler();
+            for ($i = 8; $i <= 17; $i++)
+            {
+                $sqlGetCountOfSpecificHour = "SELECT * FROM visits WHERE HOUR(visitStarted) = '$i'";
+                $result = $this->conn->query($sqlGetCountOfSpecificHour);
+                $countOfThisHourPercent = $result->num_rows / $fullCountOfEveryVisit * 100 ;
+
+                $viewHandler->printBusiestTime($i, $countOfThisHourPercent);
+            }
+        }
 	}
 
 ?>

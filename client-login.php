@@ -45,7 +45,7 @@
                             }
                             else
                             {
-                                echo "Prisijungimas nesėkmingas!";
+                                $viewHandler->printFailedLogin();
                             }
                         }
                     ?>

@@ -31,7 +31,9 @@
         <main>
             <div class="wrapper">
                 <?php
-                    echo "soon";
+                    $viewHandler->printBusiestStatistics();
+                    $dbModel = new DB_Model();
+                    $dbModel->getInformationAboutBusiestDays();
                 ?>
             </div>
         </main>
