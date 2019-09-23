@@ -156,6 +156,7 @@
         public function registerTicket($time)
         {
             $time = $this->real_escape_string($time);
+            $time = round($time);
             $clientId = $_SESSION['clientId'];
             $sql = "INSERT INTO visits (estimatedTime, client_id) VALUES ('$time', '$clientId')";
             if($this->conn->query($sql) === TRUE)
@@ -419,6 +420,12 @@
             $viewHandler = new ViewHandler();
 
             $returnValueBool = $userHandler->checkIfPositiveNumber($userInputEstimatedTime);
+
+            if(strlen($userInputEstimatedTime) > 3)
+            {
+                $viewHandler->printRandomError();
+                return false;
+            }
 
             if($returnValueBool)
             {

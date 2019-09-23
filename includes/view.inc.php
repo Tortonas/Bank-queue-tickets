@@ -149,8 +149,9 @@
 
         public function printTicketReceptionForm()
         {
+            $dbModel = new DB_Model();
             $estimatedTime = NULL;
-            if(isset($_GET['estimatedTime'])) { $estimatedTime = $_GET['estimatedTime']; }
+            if(isset($_GET['estimatedTime'])) { $estimatedTime = $_GET['estimatedTime']; $estimatedTime = $dbModel->real_escape_string($estimatedTime);}
             echo '<h1>Talonėlio išdavimo punktas</h1>
                     <form method="GET">
                         <span> Kiek laiko planuojate užtrukt? </span><input name="estimatedTime" type="text" placeholder="Laikas" value="'.$estimatedTime.'"></input><br>
@@ -160,8 +161,9 @@
 
         public function printCheckStatusWithTicketForm()
         {
+            $dbModel = new DB_Model();
             $ticketId = NULL;
-            if(isset($_GET['ticketId'])) { $ticketId = $_GET['ticketId']; }
+            if(isset($_GET['ticketId'])) { $ticketId = $_GET['ticketId']; $ticketId = $dbModel->real_escape_string($ticketId);}
             echo "<h1>Pasitikrinkite apytiksli laukimo laiką</h1>";
             echo "<form method='GET'>";
             echo "Suveskite talonėlio NR <input name='ticketId' placeholder='Talonėlio numeris' value='".$ticketId."'><br>";
@@ -258,12 +260,13 @@
 
         public function printRegisterForm()
         {
+            $dbModel = new DB_Model();
             $username = NULL;
             $name = NULL;
             $lastName = NULL;
-            if(isset($_POST['username'])) { $username = $_POST['username']; }
-            if(isset($_POST['name'])) { $name = $_POST['name']; }
-            if(isset($_POST['lastName'])) { $lastName = $_POST['lastName']; }
+            if(isset($_POST['username'])) { $username = $_POST['username']; $username = $dbModel->real_escape_string($username);}
+            if(isset($_POST['name'])) { $name = $_POST['name']; $name = $dbModel->real_escape_string($name);}
+            if(isset($_POST['lastName'])) { $lastName = $_POST['lastName']; $lastName = $dbModel->real_escape_string($lastName);}
 
             echo '<h1>Kliento registracija</h1>
                     <form method="POST">
@@ -278,8 +281,9 @@
 
         public function printClientLoginForm()
         {
+            $dbModel = new DB_Model();
             $username = NULL;
-            if(isset($_POST['username'])) { $username = $_POST['username']; }
+            if(isset($_POST['username'])) { $username = $_POST['username']; $username = $dbModel->real_escape_string($username);}
             echo '                    <h1>Kliento prisijungimo langas</h1>
                      <form method="POST">
                         <input name="username" type="text" placeholder="Vartotojo vardas" value="'.$username.'"></input><br> 
@@ -291,8 +295,9 @@
 
         public function printSpecialistLoginForm()
         {
+            $dbModel = new DB_Model();
             $username = NULL;
-            if(isset($_POST['username'])) { $username = $_POST['username']; }
+            if(isset($_POST['username'])) { $username = $_POST['username']; $username = $dbModel->real_escape_string($username);}
             echo '                    <h1>Specialisto prisijungimo langas</h1>
                     <form method="POST">
                         <input name="username" type="text" placeholder="Vartotojo vardas" value="'.$username.'"></input><br> 
