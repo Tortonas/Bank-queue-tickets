@@ -1,21 +1,21 @@
 # Bank queue tickets
  
-This project was made for the entrance to NFQ academy. Task can be found in <b>task.pdf</b> file. The whole idea behind this task is to make a way for customers who come to any bank and take waiting ticket number to see the estimated time left before they will be serviced.
+This project was made for the entrance to <b>NFQ academy</b>. Task can be found in <b>task.pdf</b> file. The whole idea behind this task is to make a way for customers who come to any bank and take waiting ticket number to see the estimated time left before they will be serviced.
 
 # How to install
 
 1. Download this project.
 2. Upload everything to live server (FTP) except <b>task.pdf</b> and <b>database.sql</b>.
 3. Upload <b>database.sql</b> file to your MySQL server.
-4. Locate <b>database.config</b> file in <b>includes</b> folder.
-5. Write your database information in this principle <b>HOST_SERVER:DB_USER:DB_PASSWORD:DB_NAME</b>
+4. Locate and open <b>database.config</b> file in <b>includes</b> folder.
+5. Write your database information in this principle <b>HOST_SERVER:DB_USER:DB_PASSWORD:DB_NAME</b> for example <b>localhost:root::you_db_name</b>
 6. You are good to go. Temporary spcialist loggings are username: <b>admin</b> and password: <b>admin</b>.
 
-# User/Admin guide
+# User/Specialist guide
 
 1. You can register as a User by pressing <b>Prisijungti kaip klientui</b> on the navigation bar and then pressing <b>Neesate užisiregistravę? Užsiregistruokite!</b>
 2. You can log in with the credentials you just created
-3. Go to client zone by clicking on <b>Client zone</b>
+3. Go to client zone by clicking on <b>Kliento zona</b>
 4. Write the estimated time you will be there and click <b>Registruotis</b>
 5. You can write your number to see the estimated waiting time left.
 6. You can cancel your visit by clicking on <b>Atšaukti vizitą</b>
