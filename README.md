@@ -1,5 +1,5 @@
 # Bank queue tickets
- 
+![github-large](readme.gif)
 This project was made for the entrance to <b>NFQ academy</b>. Task can be found in <b>task.pdf</b> file. The whole idea behind this task is to make a way for customers who come to any bank and take waiting ticket number to see the estimated time left before they will be serviced.
 
 # How to install
