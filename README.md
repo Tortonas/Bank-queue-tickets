@@ -17,6 +17,7 @@ This project was made for the entrance to <b>NFQ academy</b>. Task can be found 
 3. `$ make prepare`
 4. `$ make prepare-db`
 5. visit `localhost:80`
+6. To login as specialist use `admin:admin`. To login as client, create an account.
 
 # User/Specialist guide
 
