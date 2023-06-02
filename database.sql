@@ -179,7 +179,7 @@ CREATE TABLE `visits` (
   `id` int(11) NOT NULL,
   `estimatedTime` varchar(255) NOT NULL,
   `client_id` int(11) NOT NULL,
-  `serviced` int(11) NOT NULL,
+  `serviced` int(11) NOT NULL DEFAULT 0,
   `visitStarted` datetime DEFAULT NULL,
   `visitEnded` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
